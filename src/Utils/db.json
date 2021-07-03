@@ -1,0 +1,52 @@
+[
+  {
+    "name": "weight",
+    "data": [
+      {
+        "date": "2021 03/07",
+        "measurement": 70
+      },
+      {
+        "date": "2021 03/06",
+        "measurement": 90
+      },
+      {
+        "date": "2021 03/05",
+        "measurement": 86
+      },
+      {
+        "date": "2021 03/04",
+        "measurement": 113
+      },
+      {
+        "date": "2021 03/03",
+        "measurement": 78
+      }
+    ]
+  },
+  {
+    "name": "height",
+    "data": [
+      {
+        "date": "2021 03/07",
+        "measurement": 170
+      },
+      {
+        "date": "2021 03/06",
+        "measurement": 171
+      },
+      {
+        "date": "2021 03/05",
+        "measurement": 132
+      },
+      {
+        "date": "2021 03/04",
+        "measurement": 193
+      },
+      {
+        "date": "2021 03/03",
+        "measurement": 178
+      }
+    ]
+  }
+]

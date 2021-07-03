@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline } from "@material-ui/core";
+import React from "react";
+import { Dashboard } from "./Pages/Dashboard";
+import { Layout } from "./Pages/Layout";
+import { populateStorage } from './Utils/dbMock'
+
 
 function App() {
+  React.useEffect(() => {
+    populateStorage(); //Runs when the page is first loaded
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <CssBaseline />
+      <Dashboard />
+    </Layout>
   );
 }
 

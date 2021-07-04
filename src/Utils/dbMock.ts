@@ -37,11 +37,9 @@ export function saveMeasurement(measurementName: string, data: iMeasurement) {
 
   if(data.id === -1) {
     data.id = measurements[metricIndex].data.length ? Math.max(...measurements[metricIndex].data.map(x => x.id)) + 1 : 0;
-    console.log(`newData`, data);
     measurements[metricIndex].data.push(data);
   } else {
     let measurementIndex = measurements[metricIndex].data.findIndex(x => x.id === data.id);
-    console.log(`oldData`, data);
     measurements[metricIndex].data[measurementIndex] = data;
   }
   

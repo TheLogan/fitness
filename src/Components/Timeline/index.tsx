@@ -26,7 +26,6 @@ export const Timeline: React.FC<iTimeline> = (props) => {
       }}
       axisBottom={{
         format: value => {
-          console.log(`value`, value)
           return format(new Date(value), 'dd/MM yyyy')
         }
       }}

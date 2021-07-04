@@ -33,8 +33,6 @@ export const Dashboard: React.FC = (props) => {
   }
 
   function handleSelectMeasurement(id: number){
-    console.log('Selecting measurement', id);
-    
     if(id === -1) {
       setSelectedMeasurement({id: -1, date: new Date(), measurement: 0});
     } else {

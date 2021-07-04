@@ -35,14 +35,14 @@ export function saveMeasurement(measurementName: string, data: iMeasurement) {
 
   if (!measurements[metricIndex]?.data) measurements[metricIndex].data = [];
 
-  if(data.id === -1) {
+  if (data.id === -1) {
     data.id = measurements[metricIndex].data.length ? Math.max(...measurements[metricIndex].data.map(x => x.id)) + 1 : 0;
     measurements[metricIndex].data.push(data);
   } else {
     let measurementIndex = measurements[metricIndex].data.findIndex(x => x.id === data.id);
     measurements[metricIndex].data[measurementIndex] = data;
   }
-  
+
   localStorage.setItem(storageName, JSON.stringify(measurements));
 }
 
@@ -51,9 +51,17 @@ export function createMeasurementCategory(measurementName: string) {
   measurements.push({ name: measurementName, data: [] });
   localStorage.setItem(storageName, JSON.stringify(measurements));
 }
-export function getCategories(){
+export function getCategories() {
   let data = getAllMeasurements();
   return data.map(x => x.name);
+}
+
+export function deleteMeasurement(category: string, id: number) {
+  let all = getAllMeasurements();
+  let categoryIndex = all.findIndex(x => x.name === category);
+  let measurementIndex = all[categoryIndex].data.findIndex(x => x.id === id);
+  all[categoryIndex].data.splice(measurementIndex, 1);
+  localStorage.setItem(storageName, JSON.stringify(all));
 }
 
 

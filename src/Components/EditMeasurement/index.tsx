@@ -70,6 +70,7 @@ export const EditMeasurement: React.FC<iEditMeasurement> = (props) => {
               </MuiPickersUtilsProvider>
               <Grid container alignContent="center" justify="space-evenly" style={{ marginTop: 'auto', marginBottom: '10px' }}>
                 <Button variant="contained" onClick={props.onClose}>Back</Button>
+                <Button variant="contained" onClick={props.deleteData}>Delete</Button>
                 <Button variant="contained" onClick={callSaveChanges} >Save</Button>
               </Grid>
             </Grid>

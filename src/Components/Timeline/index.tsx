@@ -8,7 +8,7 @@ export const Timeline: React.FC<iTimeline> = (props) => {
     <Bar
       width={900}
       height={400}
-      data={props.data.map(x => { return { date: x.date, measurement: x.measurement } })}
+      data={props.data.map(x => { return { date: x.date, measurement: x.measurement, id: x.id } })}
       keys={["measurement"]}
       indexBy="date"
       colors={["#0095ff"]}
@@ -21,6 +21,7 @@ export const Timeline: React.FC<iTimeline> = (props) => {
         bottom: 36,
         left: 36
       }}
+      onClick={el => {props.onClick(el.data.id)}}
     />
   );
 };

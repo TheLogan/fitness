@@ -15,9 +15,7 @@ function getAllMeasurements() {
 
 export function getMeasurement(measurementName: string) {
   let data = getAllMeasurements();
-  console.log(`data`, data)
   let measurements = data.find(x => x.name === measurementName);
-  console.log(`measurement`, measurements)
   return measurements;
 }
 
@@ -27,7 +25,8 @@ export function saveMeasurement(measurementName: string, measurement: number, da
   let i = measurements.findIndex(x => x.name === measurementName);
 
   if (!measurements[i]?.data) measurements[i].data = [];
-  measurements[i].data.push({ date, measurement })
+  let id = measurements[i].data.length ? Math.max(...measurements[i].data.map(x => x.id)) + 1 : 0;
+  measurements[i].data.push({id, date, measurement })
   localStorage.setItem(storageName, JSON.stringify(measurements));
 }
 
@@ -48,6 +47,7 @@ export interface iMeasurementArr {
 }
 
 export interface iMeasurement {
+  id: number;
   measurement: number;
   date: string
 }

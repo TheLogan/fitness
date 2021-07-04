@@ -1,0 +1,8 @@
+#createCategoryModal{
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  padding: 5px;
+  left: calc((100vw - 400px ) /2);
+  top: calc((100vh - 400px) / 2);
+}

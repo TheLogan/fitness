@@ -3,22 +3,27 @@
     "name": "weight",
     "data": [
       {
+        "id": 0,
         "date": "2021 03/07",
         "measurement": 70
       },
       {
+        "id": 1,
         "date": "2021 03/06",
         "measurement": 90
       },
       {
+        "id": 2,
         "date": "2021 03/05",
         "measurement": 86
       },
       {
+        "id": 3,
         "date": "2021 03/04",
         "measurement": 113
       },
       {
+        "id": 4,
         "date": "2021 03/03",
         "measurement": 78
       }
@@ -28,22 +33,27 @@
     "name": "height",
     "data": [
       {
+        "id": 5,
         "date": "2021 03/07",
         "measurement": 170
       },
       {
+        "id": 6,
         "date": "2021 03/06",
         "measurement": 171
       },
       {
+        "id": 7,
         "date": "2021 03/05",
         "measurement": 132
       },
       {
+        "id": 8,
         "date": "2021 03/04",
         "measurement": 193
       },
       {
+        "id": 9,
         "date": "2021 03/03",
         "measurement": 178
       }

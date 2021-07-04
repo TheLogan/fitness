@@ -21,7 +21,9 @@ export const EditMeasurement: React.FC<iEditMeasurement> = (props) => {
       setErrorMsg("Measurement can't be empty");
       return
     }
-    props.saveChanges();
+    if(!props.selectedMeasurement || !selectedDate) return;
+
+    props.saveChanges({date: new Date(selectedDate.toISOString()), id: props.selectedMeasurement.id, measurement: Number(measurement)});
   }
 
   function changeMeasurement(value: string) {

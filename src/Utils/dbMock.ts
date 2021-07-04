@@ -1,9 +1,9 @@
 const storageName = "Measurements";
 
-export function populateStorage() {
+export function populateStorage(force: boolean = false) {
   let existing = localStorage.getItem(storageName);
   let data: iMeasurementArr[] = require("./db.json");
-  if (!existing) localStorage.setItem(storageName, JSON.stringify(data));
+  if (!existing || force) localStorage.setItem(storageName, JSON.stringify(data));
 }
 
 function getAllMeasurements() {
@@ -29,13 +29,22 @@ export function getMeasurement(measurementName: string) {
   return measurements;
 }
 
-export function saveMeasurement(measurementName: string, measurement: number, date: Date) {
+export function saveMeasurement(measurementName: string, data: iMeasurement) {
   let measurements = getAllMeasurements();
-  let i = measurements.findIndex(x => x.name === measurementName);
+  let metricIndex = measurements.findIndex(x => x.name === measurementName);
 
-  if (!measurements[i]?.data) measurements[i].data = [];
-  let id = measurements[i].data.length ? Math.max(...measurements[i].data.map(x => x.id)) + 1 : 0;
-  measurements[i].data.push({id, date, measurement })
+  if (!measurements[metricIndex]?.data) measurements[metricIndex].data = [];
+
+  if(data.id === -1) {
+    data.id = measurements[metricIndex].data.length ? Math.max(...measurements[metricIndex].data.map(x => x.id)) + 1 : 0;
+    console.log(`newData`, data);
+    measurements[metricIndex].data.push(data);
+  } else {
+    let measurementIndex = measurements[metricIndex].data.findIndex(x => x.id === data.id);
+    console.log(`oldData`, data);
+    measurements[metricIndex].data[measurementIndex] = data;
+  }
+  
   localStorage.setItem(storageName, JSON.stringify(measurements));
 }
 

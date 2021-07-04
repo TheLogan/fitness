@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Timeline } from '../../Components/Timeline'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import { getMeasurement, iMeasurement, createMeasurementCategory, getCategories } from "../../Utils/dbMock";
+import { getMeasurement, iMeasurement, createMeasurementCategory, getCategories, saveMeasurement, populateStorage } from "../../Utils/dbMock";
 import { CreateCategory } from "../../Components/CreateCategory";
 import { EditMeasurement } from "../../Components/EditMeasurement";
 import { Button, Grid } from "@material-ui/core";
@@ -32,7 +32,9 @@ export const Dashboard: React.FC = (props) => {
     createMeasurementCategory(name);
   }
 
-  function handleSelectedMeasurement(id: number){
+  function handleSelectMeasurement(id: number){
+    console.log('Selecting measurement', id);
+    
     if(id === -1) {
       setSelectedMeasurement({id: -1, date: new Date(), measurement: 0});
     } else {
@@ -40,8 +42,11 @@ export const Dashboard: React.FC = (props) => {
     }
   }
 
-  function doSaveMeasurement(){
-    
+  function doSaveMeasurement(changedMeasurement: iMeasurement){
+    if(!selectedMeasurement) return;
+    saveMeasurement(selectedMetric, changedMeasurement);
+    setSelectedMeasurement(undefined);
+    fetchTimelineData(selectedMetric);
   }
 
   return <>
@@ -49,15 +54,16 @@ export const Dashboard: React.FC = (props) => {
       <Grid item>
         <Grid container alignItems="center" justify="space-between">
           <Dropdown options={categories} value={selectedMetric} onChange={val => setSelectedMetric(val.value)} />
-          <Button variant="outlined" onClick={() => handleSelectedMeasurement(-1)}>Add measurement</Button>
+          <Button variant="outlined" onClick={() => handleSelectMeasurement(-1)}>Add measurement</Button>
           <Button variant="outlined" onClick={() => setCatCreateOpen(true)}>Create category</Button>
         </Grid>
       </Grid>
       <Grid item>
-        <Timeline data={timelineData} onClick={handleSelectedMeasurement} />
+        <Timeline data={timelineData} onClick={handleSelectMeasurement} />
       </Grid>
+      <Button onClick={() => {populateStorage(true); fetchTimelineData(selectedMetric);}}>Reset</Button>
     </Grid>
     <CreateCategory open={catCreateOpen} onClose={() => setCatCreateOpen(false)} createCategory={doCreateCategory} />
-    <EditMeasurement selectedMeasurement={selectedMeasurement} onClose={() => setSelectedMeasurement(undefined)} saveChanges={() => {doSaveMeasurement()}} />
+    <EditMeasurement selectedMeasurement={selectedMeasurement} onClose={() => setSelectedMeasurement(undefined)} saveChanges={(changedMeasurement) => {doSaveMeasurement(changedMeasurement)}} />
   </>
 }

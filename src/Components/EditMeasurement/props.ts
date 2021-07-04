@@ -1,5 +1,7 @@
+import { iMeasurement } from "../../Utils/dbMock";
+
 export interface iEditMeasurement {
-  open: boolean;
+  selectedMeasurement: iMeasurement | undefined;
   onClose: () => void;
-  saveChanges: (categoryName: string) => void;
+  saveChanges: () => void;
 }

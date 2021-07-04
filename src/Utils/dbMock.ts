@@ -10,6 +10,16 @@ function getAllMeasurements() {
   let dataString = localStorage.getItem(storageName);
   if (!dataString) return [];
   let data: iMeasurementArr[] = JSON.parse(dataString);
+
+  for (const metric of data) {
+    metric.data = metric.data.map(x => {
+      return {
+        id: x.id,
+        date: new Date(x.date),
+        measurement: x.measurement
+      }
+    })
+  }
   return data;
 }
 
@@ -19,9 +29,8 @@ export function getMeasurement(measurementName: string) {
   return measurements;
 }
 
-export function saveMeasurement(measurementName: string, measurement: number, date: string) {
+export function saveMeasurement(measurementName: string, measurement: number, date: Date) {
   let measurements = getAllMeasurements();
-
   let i = measurements.findIndex(x => x.name === measurementName);
 
   if (!measurements[i]?.data) measurements[i].data = [];
@@ -49,5 +58,5 @@ export interface iMeasurementArr {
 export interface iMeasurement {
   id: number;
   measurement: number;
-  date: string
+  date: Date
 }
